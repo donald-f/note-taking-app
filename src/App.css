@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css?family=Aleo:400,400i|Poppins:700&display=swap");
+
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: #100007;
+  letter-spacing: 1px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.body-text {
+  font-family: "Aleo", serif;
+  font-weight: 400;
+  color: #535353;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.muted {
+  font-size: 0.8rem;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.layout {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+}
+
+.sidebar,
+main {
+  padding: 0 1rem;
+  margin: 1rem 0;
+  min-height: 400px;
+}
+
+.sidebar {
+  border-right: 1px solid #ccc;
+  width: 320px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 0.5rem;
+  margin: 1rem auto;
+}
+
+.sidebar li.active {
+  background: #f6f6f6;
+}
+
+main {
+  flex: 1;
+}
+
+main header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.button-group .button {
+  margin-left: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+article {
+  max-width: 640px;
+  margin: 1rem auto;
+}
+
+/* Button Styling */
+.button {
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  background: #535353;
+}
+
+.button.block {
+  display: block;
+  width: 100%;
+}
+
+.button.primary {
+  background: #3fa7d6;
+}
+
+.button.secondary {
+  background: #ee6352;
+}
+
+.button.tertiary {
+  background: #59cd90;
 }
