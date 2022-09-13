@@ -1,0 +1,27 @@
+/* Button Styling */
+.button {
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  background: #535353;
+}
+
+.button.block {
+  display: block;
+  width: 100%;
+}
+
+.button.primary {
+  background: #3fa7d6;
+}
+
+.button.secondary {
+  background: #ee6352;
+}
+
+.button.tertiary {
+  background: #59cd90;
+}
