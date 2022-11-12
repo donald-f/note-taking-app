@@ -1,12 +1,13 @@
 /* Button Styling */
 .button {
   border: none;
-  border-radius: 0;
   padding: 0.5rem 1rem;
   text-align: center;
-  color: #fff;
+  color: #fff !important;
   text-transform: uppercase;
   background: #535353;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .button.block {
@@ -17,11 +18,20 @@
 .button.primary {
   background: #3fa7d6;
 }
+.button.primary:hover {
+  background: #239bd3;
+}
 
 .button.secondary {
   background: #ee6352;
 }
+.button.secondary:hover {
+  background: #e94c38;
+}
 
 .button.tertiary {
   background: #59cd90;
+}
+.button.tertiary:hover {
+  background: #36ca7b;
 }
