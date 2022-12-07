@@ -67,8 +67,3 @@ main header {
   align-items: center;
   justify-content: space-between;
 }
-
-article {
-  max-width: 640px;
-  margin: 1rem auto;
-}
