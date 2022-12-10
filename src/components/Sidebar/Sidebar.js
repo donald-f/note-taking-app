@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
+import NotesContext from "../../store/notes-context";
 import Button from "../UI/Button";
 import NoteSelection from "./NoteSelection";
 
 const Sidebar = () => {
+  const notesCtx = useContext(NotesContext);
   const dummyNotes = [
     {
-      title: "My Special Note",
+      // title: "My Special Note",
+      title: notesCtx.notes[0].title,
       lastUpdated: "1:37PM 7/26/19",
       active: true,
       id: Math.random(),
     },
     {
-      title: "My Special Note2",
+      title: notesCtx.notes[1].title,
       lastUpdated: "1:39PM 7/26/19",
       active: false,
       id: Math.random(),
     },
   ];
-  const noteSelections = dummyNotes.map((note) => {
+  console.log(
+    notesCtx.notes[0].lastUpdated,
+    typeof notesCtx.notes[0].lastUpdated
+  );
+  const noteSelections = notesCtx.notes.map((note) => {
     return (
       <NoteSelection
         key={note.id}
