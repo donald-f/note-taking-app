@@ -5,38 +5,44 @@ import NoteSelection from "./NoteSelection";
 
 const Sidebar = () => {
   const notesCtx = useContext(NotesContext);
-  const dummyNotes = [
-    {
-      // title: "My Special Note",
-      title: notesCtx.notes[0].title,
-      lastUpdated: "1:37PM 7/26/19",
+  const activateNoteHandler = (id) => {
+    notesCtx.setModifyingNote(false);
+    notesCtx.setActiveNote(id);
+  };
+  const createNoteHandler = () => {
+    const newId = notesCtx.notes.reduce((updateId, note) => {
+      return `n${Math.max(+updateId.slice(1), +note.id.slice(1)) + 1}`;
+    }, "n1");
+    // const newId = notesCtx.notes.length;
+    notesCtx.addNote({
       active: true,
-      id: Math.random(),
-    },
-    {
-      title: notesCtx.notes[1].title,
-      lastUpdated: "1:39PM 7/26/19",
-      active: false,
-      id: Math.random(),
-    },
-  ];
-  console.log(
-    notesCtx.notes[0].lastUpdated,
-    typeof notesCtx.notes[0].lastUpdated
-  );
+      body: "",
+      title: "",
+      id: newId,
+      lastUpdated: "",
+    });
+    notesCtx.setActiveNote(newId);
+  };
   const noteSelections = notesCtx.notes.map((note) => {
     return (
       <NoteSelection
+        id={note.id}
         key={note.id}
-        title={note.title}
+        title={note.title === "" ? "Untitled" : note.title}
         active={note.active}
         lastUpdated={note.lastUpdated}
+        onClick={activateNoteHandler.bind(null, note.id)}
       />
     );
   });
   return (
     <aside className="sidebar">
-      <Button className="block tertiary header-text">Create Note</Button>
+      <Button
+        className="block tertiary header-text"
+        onClick={createNoteHandler}
+      >
+        Create Note
+      </Button>
       <ul>{noteSelections}</ul>
     </aside>
   );

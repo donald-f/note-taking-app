@@ -1,53 +1,94 @@
-import React, { useState, useEffect } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import React, { useEffect, useContext } from "react";
+import NotesContext from "../../store/notes-context";
+// import useLocalStorage from "../../hooks/useLocalStorage";
 import Button from "../UI/Button";
 import "./Note.css";
 
-const Note = (props) => {
-  const [blah, setBlah] = useLocalStorage("blah", "");
-
-  const [creatingNote, setCreatingNote] = useState(false);
+const Note = () => {
+  const notesCtx = useContext(NotesContext);
+  const activeNote = notesCtx.notes.find(
+    (note) => note.id === notesCtx.activeNoteId
+  );
 
   useEffect(() => {
-    if (!props.paragraphs) {
-      setCreatingNote(true);
+    console.log(notesCtx.notes.length);
+  }, [notesCtx.notes.length]);
+
+  useEffect(() => {
+    if (notesCtx.notes.length === 0) {
+      console.log("here");
+      notesCtx.setModifyingNote(true);
+      notesCtx.addNote({
+        active: true,
+        body: "",
+        title: "",
+        id: "n1",
+        lastUpdated: "",
+      });
+      notesCtx.setActiveNote("n1");
     }
-  }, [props.paragraphs]);
+  }, [notesCtx.notes.length, notesCtx.activeNoteId, notesCtx]);
 
-  // need to NOT have key={i}
-  const noteParagraphs = props.paragraphs.map((para, i) => {
-    return (
-      <p className="body-text" key={i}>
-        {para}
-      </p>
-    );
-  });
+  console.log(notesCtx.notes.length, notesCtx.modifyingNote);
 
-  if (!creatingNote)
+  const title = activeNote?.title ? activeNote.title : "";
+  const body = activeNote?.body ? activeNote.body : "";
+
+  if (title === "" && body === "") {
+    notesCtx.setModifyingNote(true);
+  }
+  const noteParagraphs = notesCtx.activeNoteId ? (
+    activeNote.body
+      .split("\n")
+      .filter((para) => para !== "")
+      .map((para, i) => {
+        return (
+          <p className="body-text" key={i}>
+            {para}
+          </p>
+        );
+      })
+  ) : (
+    <p></p>
+  );
+
+  const updateTitleHandler = (e) => {
+    notesCtx.editNote({ ...activeNote, title: e.target.value });
+  };
+  const updateBodyHandler = (e) => {
+    notesCtx.editNote({ ...activeNote, body: e.target.value });
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    notesCtx.setModifyingNote(false);
+  };
+
+  if (!notesCtx.modifyingNote)
     return (
       <article>
-        <h1 className="header-text">My Special Note</h1>
+        <h1 className="header-text">{title}</h1>
         {noteParagraphs}
-        <input
-          type="text"
-          value={blah}
-          onChange={(e) => setBlah(e.target.value)}
-        ></input>
       </article>
     );
   return (
-    <form>
-      <label htmlFor="note-title">Note Title</label>
+    <form onSubmit={submitHandler}>
+      <label htmlFor="note-title">Title</label>
       <input
         id="note-title"
         className="title-input"
         type="text"
-        value={blah}
-        onChange={(e) => setBlah(e.target.value)}
+        value={title}
+        onChange={updateTitleHandler}
       ></input>
       <label htmlFor="note-body">Note Body</label>
-      <textarea id="note-body"></textarea>
-      <Button onClick={() => {}}>Submit</Button>
+      <textarea
+        id="note-body"
+        value={body}
+        onChange={updateBodyHandler}
+      ></textarea>
+      <Button type="submit" className="submit">
+        Submit
+      </Button>
     </form>
   );
 };

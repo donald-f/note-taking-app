@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Note from "./Note";
 
 // disallow backticks from notetaking
 
 const Main = () => {
+  const [modifyingNote, setModifyingNote] = useState(false);
   const dummyParas = [
     `You might remember the Dell computer commercials in which a youth
           reports this exciting news to his friends that they are about to get
@@ -24,8 +25,13 @@ const Main = () => {
   ];
   return (
     <main>
-      <Header />
-      <Note title="" paragraphs={dummyParas} />
+      <Header setModifyingNote={setModifyingNote} />
+      <Note
+        title=""
+        paragraphs={dummyParas}
+        modifyingNote={modifyingNote}
+        setModifyingNote={setModifyingNote}
+      />
     </main>
   );
 };

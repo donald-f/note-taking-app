@@ -2,9 +2,13 @@ import React from "react";
 
 const NotesContext = React.createContext({
   notes: [],
+  activeNoteId: "",
+  modifyingNote: false,
+  setModifyingNote: () => {},
   addNote: (note) => {},
-  deleteNote: (id) => {},
+  removeNote: (id) => {},
   editNote: (id, newTitle, newBody) => {},
+  setActiveNote: (id) => {},
 });
 
 export default NotesContext;

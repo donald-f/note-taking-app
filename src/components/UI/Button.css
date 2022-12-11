@@ -35,3 +35,10 @@
 .button.tertiary:hover {
   background: #36ca7b;
 }
+
+.button.submit {
+  background: #244618;
+}
+.button.submit:hover {
+  background: #183010;
+}

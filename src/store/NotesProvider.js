@@ -22,30 +22,69 @@ const NotesProvider = (props) => {
   ]);
   const addNote = (note) => {
     setNotes((notes) => {
-      return [...notes, note];
+      return [note, ...notes];
     });
   };
-  const removeNote = (id) => {
+  const [activeNoteId, setActiveNoteId] = useLocalStorage(
+    "activeNoteId",
+    notes.find((note) => note.active === true)?.id || null
+  );
+  const [modifyingNote, setModifyingNote] = useLocalStorage(
+    "modifyingNote",
+    false
+  );
+  const removeNote = (id = activeNoteId) => {
+    if (notes.length - 1 === 0) {
+      setActiveNoteId(null);
+    } else if (id === activeNoteId) {
+      setActiveNote(notes.find((note) => note.id !== id).id);
+    }
     setNotes((notes) => {
       return notes.filter((note) => note.id !== id);
     });
+    setModifyingNote(false);
   };
-  const editNote = (id, newTitle, newBody) => {
+  const editNote = (editedNote) => {
     setNotes((notes) => {
+      // will want the most recently updated to be on the top
       return notes.map((note) => {
-        if (note.id === id) {
-          return { id: id, title: newTitle, body: newBody };
+        if (note.id === editedNote.id) {
+          const d = new Date();
+          const dateFormatted = `${d.getHours() % 12 || 12}:${d.getMinutes()} ${
+            d.getMonth() + 1
+          }/${d.getDate().toString()}/${d.getFullYear().toString().slice(-2)}`;
+          return {
+            id: editedNote.id,
+            title: editedNote.title,
+            body: editedNote.body,
+            active: true,
+            lastUpdated: dateFormatted,
+          };
         } else {
           return note;
         }
       });
     });
   };
+  const setActiveNote = (id) => {
+    setActiveNoteId(id);
+    setNotes((notes) => {
+      return notes.map((note) => {
+        return note.id === id
+          ? { ...note, active: true }
+          : { ...note, active: false };
+      });
+    });
+  };
   const notesContext = {
     notes: notes,
+    modifyingNote: modifyingNote,
+    setModifyingNote: setModifyingNote,
     addNote: addNote,
-    deleteNote: removeNote,
+    removeNote: removeNote,
     editNote: editNote,
+    setActiveNote: setActiveNote,
+    activeNoteId: activeNoteId,
   };
 
   return (
@@ -56,43 +95,3 @@ const NotesProvider = (props) => {
 };
 
 export default NotesProvider;
-
-/* converted from Max's method
-
-const notesReducer = (state, action) => {
-   switch (action.type) {
-      case 'ADD': {
-         console.log('add');
-         return 'add'
-      }
-      case 'REMOVE': {
-         console.log('remove');
-         return 'remove'
-      }
-      default:
-         return state;
-   }
-}
-
-const NotesProvider = () => {
-   const defaultNotesState = [];
-   const [notesState, dispatchNotesAction] = useReducer(notesReducer, defaultNotesState)
-   const addNoteToCollection = note =>{
-      dispatchNotesAction({type: 'ADD', note: note})
-   }
-   const removeNoteFromCollection = id => {
-      dispatchNotesAction({type: 'REMOVE', id: id})
-   }
-   const notesContext = {
-      notes: notesState.notes,
-      addNote: addNoteToCollection,
-      deleteNote: removeNoteFromCollection
-   }
-  return (
-    <div>NotesProvider</div>
-  )
-}
-
-export default NotesProvider
-
-*/
