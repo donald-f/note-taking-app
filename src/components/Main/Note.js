@@ -10,32 +10,9 @@ const Note = () => {
     (note) => note.id === notesCtx.activeNoteId
   );
   const { notes, addNote, setModifyingNote, setActiveNote } = notesCtx;
-  // const addNote = useCallback(() => notesCtx.addNote, [notesCtx.addNote]);
-  // const setModifyingNote = useCallback(
-  //   () => notesCtx.setModifyingNote,
-  //   [notesCtx.setModifyingNote]
-  // );
-  // const setActiveNote = useCallback(
-  //   () => notesCtx.setActiveNote,
-  //   [notesCtx.setActiveNote]
-  // );
-
-  // if (notesCtx.notes.length === 0) {
-  //   console.log("here");
-  //   notesCtx.addNote({
-  //     active: true,
-  //     body: "",
-  //     title: "",
-  //     id: "n1",
-  //     lastUpdated: "",
-  //   });
-  //   notesCtx.setModifyingNote(true);
-  //   notesCtx.setActiveNote("n1");
-  // }
 
   useEffect(() => {
     if (notes.length === 0) {
-      console.log("here");
       addNote({
         active: true,
         body: "",
@@ -47,8 +24,6 @@ const Note = () => {
       setActiveNote("n1");
     }
   }, [notes, addNote, setModifyingNote, setActiveNote]);
-
-  console.log(notesCtx.notes.length, notesCtx.modifyingNote);
 
   const title = activeNote?.title ? activeNote.title : "";
   const body = activeNote?.body ? activeNote.body : "";
