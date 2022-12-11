@@ -53,9 +53,16 @@ const NotesProvider = (props) => {
       return notes.map((note) => {
         if (note.id === editedNote.id) {
           const d = new Date();
-          const dateFormatted = `${d.getHours() % 12 || 12}:${d.getMinutes()} ${
+          const dateFormatted = `${(d.getHours() % 12 || 12)
+            .toString()
+            .padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")} ${(
             d.getMonth() + 1
-          }/${d.getDate().toString()}/${d.getFullYear().toString().slice(-2)}`;
+          )
+            .toString()
+            .padStart(2, "0")}/${d.getDate().toString().padStart(2, "0")}/${d
+            .getFullYear()
+            .toString()
+            .slice(-2)}`;
           return {
             id: editedNote.id,
             title: editedNote.title,
