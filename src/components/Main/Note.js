@@ -9,25 +9,44 @@ const Note = () => {
   const activeNote = notesCtx.notes.find(
     (note) => note.id === notesCtx.activeNoteId
   );
+  const { notes, addNote, setModifyingNote, setActiveNote } = notesCtx;
+  // const addNote = useCallback(() => notesCtx.addNote, [notesCtx.addNote]);
+  // const setModifyingNote = useCallback(
+  //   () => notesCtx.setModifyingNote,
+  //   [notesCtx.setModifyingNote]
+  // );
+  // const setActiveNote = useCallback(
+  //   () => notesCtx.setActiveNote,
+  //   [notesCtx.setActiveNote]
+  // );
+
+  // if (notesCtx.notes.length === 0) {
+  //   console.log("here");
+  //   notesCtx.addNote({
+  //     active: true,
+  //     body: "",
+  //     title: "",
+  //     id: "n1",
+  //     lastUpdated: "",
+  //   });
+  //   notesCtx.setModifyingNote(true);
+  //   notesCtx.setActiveNote("n1");
+  // }
 
   useEffect(() => {
-    console.log(notesCtx.notes.length);
-  }, [notesCtx.notes.length]);
-
-  useEffect(() => {
-    if (notesCtx.notes.length === 0) {
+    if (notes.length === 0) {
       console.log("here");
-      notesCtx.setModifyingNote(true);
-      notesCtx.addNote({
+      addNote({
         active: true,
         body: "",
         title: "",
         id: "n1",
         lastUpdated: "",
       });
-      notesCtx.setActiveNote("n1");
+      setModifyingNote(true);
+      setActiveNote("n1");
     }
-  }, [notesCtx.notes.length, notesCtx.activeNoteId, notesCtx]);
+  }, [notes, addNote, setModifyingNote, setActiveNote]);
 
   console.log(notesCtx.notes.length, notesCtx.modifyingNote);
 

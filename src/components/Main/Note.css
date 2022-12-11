@@ -20,6 +20,7 @@ label {
   flex-grow: 0;
 }
 textarea {
-  flex-grow: 1;
+  flex-grow: 0;
+  flex-basis: 300px;
   resize: vertical;
 }

@@ -1,5 +1,5 @@
 import NotesContext from "./notes-context";
-import React from "react";
+import React, { useCallback } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 // import { useReducer } from "react";
 
@@ -20,11 +20,14 @@ const NotesProvider = (props) => {
       lastUpdated: "12:10PM 12/10/22",
     },
   ]);
-  const addNote = (note) => {
-    setNotes((notes) => {
-      return [note, ...notes];
-    });
-  };
+  const addNote = useCallback(
+    (note) => {
+      setNotes((notes) => {
+        return [note, ...notes];
+      });
+    },
+    [setNotes]
+  );
   const [activeNoteId, setActiveNoteId] = useLocalStorage(
     "activeNoteId",
     notes.find((note) => note.active === true)?.id || null
@@ -66,16 +69,19 @@ const NotesProvider = (props) => {
       });
     });
   };
-  const setActiveNote = (id) => {
-    setActiveNoteId(id);
-    setNotes((notes) => {
-      return notes.map((note) => {
-        return note.id === id
-          ? { ...note, active: true }
-          : { ...note, active: false };
+  const setActiveNote = useCallback(
+    (id) => {
+      setActiveNoteId(id);
+      setNotes((notes) => {
+        return notes.map((note) => {
+          return note.id === id
+            ? { ...note, active: true }
+            : { ...note, active: false };
+        });
       });
-    });
-  };
+    },
+    [setActiveNoteId, setNotes]
+  );
   const notesContext = {
     notes: notes,
     modifyingNote: modifyingNote,
