@@ -10,10 +10,10 @@ const Sidebar = () => {
     notesCtx.setActiveNote(id);
   };
   const createNoteHandler = () => {
-    const newId = notesCtx.notes.reduce((updateId, note) => {
-      return `n${Math.max(+updateId.slice(1), +note.id.slice(1)) + 1}`;
-    }, "n1");
-    // const newId = notesCtx.notes.length;
+    const highestNoteIdNum = notesCtx.notes.reduce((updateId, note) => {
+      return Math.max(updateId, +note.id.slice(1));
+    }, 1);
+    const newId = `n${highestNoteIdNum + 1}`;
     notesCtx.addNote({
       active: true,
       body: "",

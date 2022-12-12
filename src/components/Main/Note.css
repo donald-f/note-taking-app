@@ -21,6 +21,6 @@ label {
 }
 textarea {
   flex-grow: 0;
-  flex-basis: 300px;
+  flex-basis: 200px;
   resize: vertical;
 }

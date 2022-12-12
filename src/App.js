@@ -1,6 +1,7 @@
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./App.css";
-import Main from "./components/Main/Main";
+import Header from "./components/Main/Header";
+import Note from "./components/Main/Note";
 import NotesProvider from "./store/NotesProvider";
 
 function App() {
@@ -8,7 +9,10 @@ function App() {
     <NotesProvider>
       <section className="layout">
         <Sidebar />
-        <Main />
+        <main>
+          <Header />
+          <Note />
+        </main>
       </section>
     </NotesProvider>
   );
