@@ -1,5 +1,5 @@
 import React from "react";
-import "./NoteSelection.css";
+import "./NoteSelect.css";
 
 const NoteSelect = (props) => {
   return (

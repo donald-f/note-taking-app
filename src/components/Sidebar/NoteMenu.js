@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import NotesContext from "../../store/notes-context";
 import Button from "../UI/Button";
-import NoteSelection from "./NoteSelection";
+import NoteSelect from "./NoteSelect";
+import "./NoteMenu.css";
 
 const Sidebar = () => {
   const notesCtx = useContext(NotesContext);
@@ -25,7 +26,7 @@ const Sidebar = () => {
   };
   const noteSelections = notesCtx.notes.map((note) => {
     return (
-      <NoteSelection
+      <NoteSelect
         id={note.id}
         key={note.id}
         title={note.title === "" ? "Untitled" : note.title}

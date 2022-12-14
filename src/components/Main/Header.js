@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import NotesContext from "../../store/notes-context";
 import Button from "../UI/Button";
-import classes from "./Header.module.css";
+import "./Header.css";
 
 const Header = () => {
   const notesCtx = useContext(NotesContext);
@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header>
       <p className="body-text no-margin muted">Last Updated: {dateUpdated}</p>
-      <div className={classes["button-group"]}>
+      <div className="button-group">
         <Button
           className="primary header-text"
           onClick={() => {

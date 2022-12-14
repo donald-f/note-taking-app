@@ -1,4 +1,4 @@
-import Sidebar from "./components/Sidebar/Sidebar";
+import NoteMenu from "./components/Sidebar/NoteMenu";
 import "./App.css";
 import Header from "./components/Main/Header";
 import Note from "./components/Main/Note";
@@ -8,7 +8,7 @@ function App() {
   return (
     <NotesProvider>
       <section className="layout">
-        <Sidebar />
+        <NoteMenu />
         <main>
           <Header />
           <Note />

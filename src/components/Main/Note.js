@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import NotesContext from "../../store/notes-context";
-// import useLocalStorage from "../../hooks/useLocalStorage";
 import Button from "../UI/Button";
 import "./Note.css";
 
@@ -28,7 +27,7 @@ const Note = () => {
   const title = activeNote?.title ? activeNote.title : "";
   const body = activeNote?.body ? activeNote.body : "";
 
-  if (title === "" && body === "") {
+  if (title.trim() === "" && body.trim() === "") {
     notesCtx.setModifyingNote(true);
   }
   const noteParagraphs = notesCtx.activeNoteId ? (

@@ -21,7 +21,8 @@ label {
 }
 textarea {
   flex-grow: 0;
-  flex-basis: 200px;
+  height: 200px;
+  min-height: 40px;
   resize: vertical;
 }
 @media only screen and (max-width: 600px) {
