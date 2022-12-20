@@ -1,7 +1,6 @@
 import NotesContext from "./notes-context";
 import React, { useCallback } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-// import { useReducer } from "react";
 
 const NotesProvider = (props) => {
   const [notes, setNotes] = useLocalStorage("notes", [
@@ -42,7 +41,7 @@ const NotesProvider = (props) => {
   };
   const editNote = (editedNote) => {
     setNotes((notes) => {
-      // will want the most recently updated to be on the top
+      // may want to change the order of the notes to make the most recently modified appear at the top; it doesn't currently do this.
       return notes.map((note) => {
         if (note.id === editedNote.id) {
           const d = new Date();
