@@ -1,3 +1,11 @@
 .note-selector {
   cursor: pointer;
+  padding: 0.5rem;
+  margin: 1rem auto;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.note-selector.active {
+  background: #f6f6f6;
 }

@@ -5,10 +5,16 @@ import "./Note.css";
 
 const Note = () => {
   const notesCtx = useContext(NotesContext);
-  const activeNote = notesCtx.notes.find(
-    (note) => note.id === notesCtx.activeNoteId
-  );
-  const { notes, addNote, setModifyingNote, setActiveNote } = notesCtx;
+  const {
+    notes,
+    addNote,
+    modifyingNote,
+    setModifyingNote,
+    setActiveNote,
+    activeNoteId,
+  } = notesCtx;
+
+  const activeNote = notes.find((note) => note.id === activeNoteId);
 
   useEffect(() => {
     if (notes.length === 0) {
@@ -27,10 +33,14 @@ const Note = () => {
   const title = activeNote?.title ? activeNote.title : "";
   const body = activeNote?.body ? activeNote.body : "";
 
-  if (title.trim() === "" && body.trim() === "") {
-    notesCtx.setModifyingNote(true);
-  }
-  const noteParagraphs = notesCtx.activeNoteId ? (
+  useEffect(() => {
+    if (modifyingNote) return;
+    if (title.trim() === "" && body.trim() === "") {
+      setModifyingNote(true);
+    }
+  }, [modifyingNote, activeNoteId, body, title, setModifyingNote]);
+
+  const noteParagraphs = activeNoteId ? (
     activeNote.body
       .split("\n")
       .filter((para) => para !== "")
@@ -53,10 +63,10 @@ const Note = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    notesCtx.setModifyingNote(false);
+    setModifyingNote(false);
   };
 
-  if (!notesCtx.modifyingNote)
+  if (!modifyingNote)
     return (
       <article>
         <h1 className="header-text">{title}</h1>
