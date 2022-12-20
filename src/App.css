@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Aleo:400,400i|Poppins:700&display=swap");
 
-* {
-  box-sizing: border-box;
-}
-
 .header-text {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -35,27 +31,6 @@ main {
   padding: 0 1rem;
   margin: 1rem 0;
   min-height: 400px;
-}
-
-.sidebar {
-  border-right: 1px solid #ccc;
-  width: 320px;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 0.5rem;
-  margin: 1rem auto;
-  border-radius: 3px;
-}
-
-.sidebar li.active {
-  background: #f6f6f6;
 }
 
 main {
